@@ -1,9 +1,28 @@
 import streamlit as st
 import pickle
+import boto3
+import os
 from streamlit_option_menu import option_menu
 
 # Change Name & Logo
 st.set_page_config(page_title="Disease Prediction", page_icon="⚕️")
+
+# --- Download models from S3 at startup ---
+S3_BUCKET = "diagnovus-models-737112c0"
+MODEL_FILES = [
+    "heart_disease_model.sav",
+    "parkinsons_model.sav",
+    "lungs_disease_model.sav",
+    "Thyroid_model.sav"
+]
+
+os.makedirs("Models", exist_ok=True)
+s3 = boto3.client("s3")
+
+for filename in MODEL_FILES:
+    local_path = f"Models/{filename}"
+    if not os.path.exists(local_path):
+        s3.download_file(S3_BUCKET, filename, local_path)
 
 # Hiding Streamlit add-ons
 hide_st_style = """
