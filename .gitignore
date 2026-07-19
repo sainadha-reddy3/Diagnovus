@@ -1,0 +1,13 @@
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
+# SSH keys - never commit these
+terraform/diagnovus-key
+terraform/diagnovus-key.pub
+
+# Python
+__pycache__/
+*.pyc
