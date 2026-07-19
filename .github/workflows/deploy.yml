@@ -40,8 +40,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGISTRY
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 519749210938.dkr.ecr.us-east-1.amazonaws.com
+            docker pull 519749210938.dkr.ecr.us-east-1.amazonaws.com/diagnovus-app:latest
             docker stop diagnovus-container || true
             docker rm diagnovus-container || true
-            docker run -d -p 8501:8501 --name diagnovus-container $ECR_REGISTRY/$ECR_REPOSITORY:latest
+            docker run -d -p 8501:8501 --name diagnovus-container 519749210938.dkr.ecr.us-east-1.amazonaws.com/diagnovus-app:latest
